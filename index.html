@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eviltorn Shop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="background-elements"></div>
+
+    <nav class="sticky-nav">
+        <a href="#" onclick="scrollToTop(event)">МАГАЗИН</a>
+        <a href="#delivery">ДОСТАВКА І ОПЛАТА</a>
+        <a href="#footer">КОНТАКТИ</a>
+    </nav>
+
+    <header>
+        <div class="logo">
+            <img src="images/Tumbochka_sign1.png" alt="Eviltorn shop">
+        </div>
+        <div class="filters">
+            <button class="filter-btn active" onclick="filterProducts('all')">ВСІ</button>
+            <button class="filter-btn" onclick="filterProducts('stickers')">СТІКЕРИ</button>
+            <button class="filter-btn" onclick="filterProducts('clothes')">ОДЯГ</button>
+            <button class="filter-btn" onclick="filterProducts('accessories')">БРЕЛКИ</button>
+            <button class="filter-btn" onclick="filterProducts('posters')">ПОСТЕРИ</button>
+            <button class="filter-btn" onclick="filterProducts('models')">МОДЕЛЬКИ</button>
+            <button class="filter-btn" onclick="filterProducts('discounts')">ЗНИЖКИ</button>
+        </div>
+    </header>
+
+    <main id="shop-top">
+        <section id="shop" class="product-grid"></section>
+
+        <section id="delivery" class="info-section">
+            <h2>Інформація про доставку та оплату:</h2>
+            <p>Доставляємо по Україні "Новою Поштою". <p>Відправка здійснюється з Києва протягом 3-4 робочих днів.</p>
+            <h3>Оплата можлива наступними способами:</h3>
+            <ul>
+                <li>• Безготівковий розрахунок на карту.</li>
+                <li>• При отриманні у відділенні (післяплата).</li>
+                <li>• Через PayPal.</li>
+            </ul>
+            <p>Якщо у вас є питання — пишіть нам в <a href="#">Telegram!</a></p>
+        </section>
+    </main>
+
+    <footer id="footer">
+        <div class="social-icons">
+            <a href="https://www.instagram.com/eviltornsberg/"><img src="images/insta.png" alt="Inst"></a>
+            <a href="https://t.me/+34_Q6gQKCj0zYjNi"><img src="images/tg.png" alt="TG"></a>
+            <a href="https://www.tiktok.com/@zloytorn?"><img src="images/tiktok.png" alt="tiktok"></a>
+        </div>
+        <p class="copyright">© Eviltorn Shop, 2025.</p>
+    </footer>
+
+    <div id="cart-icon" class="cart-icon hidden" onclick="openCart()">
+        <img src="images/bag.png" alt="Кошик">
+        <span id="cart-count">0</span>
+    </div>
+
+    <div id="product-modal" class="modal">
+        <div class="modal-overlay" onclick="closeModal('product-modal')"></div>
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('product-modal')">&times;</span>
+            <div class="product-modal-flex">
+                <img id="modal-img" src="" alt="">
+                <div class="modal-info">
+                    <h2 id="modal-title"></h2>
+                    <p id="modal-price" class="modal-price-val"></p>
+                    <div class="controls-row">
+<div class="qty-stepper">
+    <button onclick="changeQty(-1)">-</button>
+    <input type="number" id="qty-input" value="1" min="1" readonly>
+    <button onclick="changeQty(1)">+</button>
+</div>
+                        <button class="add-btn" onclick="addToCart()">До кошика</button>
+                    </div>
+                    <p class="modal-desc">Одиночний стікер кумедного стилізованого вовка. Матеріал: водостійка плівка з матовою ламінацією. Розмір: 7х7 см.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cart-modal" class="modal">
+        <div class="modal-overlay" onclick="closeModal('cart-modal')"></div>
+        <div class="modal-content cart-modal-content">
+            <span class="close" onclick="closeModal('cart-modal')">&times;</span>
+            <h2 style="text-align: center; color: #666;">Список товарів у кошику</h2>
+            <div id="cart-items-list"></div>
+            <div class="total-price">Загальна сума: <span id="total-val">0</span> ГРН</div>
+            <form class="checkout-form">
+                <input type="text" placeholder="Ім'я" required>
+                <input type="text" placeholder="Прізвище" required>
+                <input type="tel" placeholder="Номер телефону" required>
+                <input type="text" placeholder="Як з вами зв'язатися" required>
+                <select>
+                    <option>Телеграм</option>
+                    <option>Інстаграм</option>
+                    <option>Вайбер</option>
+                </select>
+                <p style="font-size: 12px;">Якщо ви обрали Телеграм або Інстаграм то в коментарі вкажіть ваш нікнейм.</p>
+                <input type="text" placeholder="Адреса доставки" required>
+                <select>
+                    <option>Грошовий переказ на карту</option>
+                    <option>Оплата при отриманні (комісія НП 2%+20 грн)</option>
+                </select>
+                <textarea placeholder="Коментар"></textarea>
+                <input type="text" placeholder="Промокод">
+                <button type="submit" class="order-btn">Оформити замовлення</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
