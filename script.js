@@ -289,7 +289,6 @@ function openCart() {
             const itemTotal = item.price * item.qty;
             total += itemTotal;
             return `
-            // зовнішній вигляд одного рядка товару всередині кошика
             
                 <div class="cart-item" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:15px; padding-bottom:10px; border-bottom:1px solid #eee;">
                     <img src="${item.img}" style="width:50px; height:50px; border-radius:8px; object-fit:cover;">
@@ -385,3 +384,4 @@ function createFloatingElements(count) {
 
 // Запуск функції
 window.addEventListener('load', () => createFloatingElements(55));
+
