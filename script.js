@@ -139,7 +139,7 @@ let cart = [];
 let currentProduct = null;
 let currentImageIndex = 0; // Змінна для відстеження фото в галереї
 
-// 1. Відображення товарів на головній
+// Відображення товарів на головній
 function renderProducts(filter = 'all') {
     const grid = document.getElementById('shop');
     if (!grid) return;
@@ -162,24 +162,22 @@ if (orderForm) {
     orderForm.addEventListener('submit', function(e) {
         e.preventDefault(); // Зупиняємо стандартне перезавантаження сторінки
 
-        // 1. Тут можна додати код для відправки даних на сервер або в Телеграм
-
-        // 2. Очищуємо кошик
+        // Очищуємо кошик
         cart = []; 
         updateCartUI(); // Оновлюємо лічильник на іконці
 
-        // 3. Закриваємо модальне вікно кошика
+        // Закриваємо модальне вікно кошика
         closeModal('cart-modal');
 
-        // 4. Повідомляємо користувача (опціонально)
+        // Повідомляємо користувача (опціонально)
         alert('Дякуємо! Ваше замовлення прийняте.');
         
-        // 5. Очищуємо поля форми для наступного разу
+        // 5Очищуємо поля форми для наступного разу
         orderForm.reset();
     });
 }
 
-// 2. Відкриття модалки товару
+// Відкриття модалки товару
 function openProduct(p) {
     currentProduct = p;
     currentImageIndex = 0; // Завжди починаємо з першого фото
@@ -199,21 +197,21 @@ function openProduct(p) {
     document.getElementById('product-modal').style.display = 'block';
 }
 
-// 3. Оновлення фото при перемиканні
+// Оновлення фото при перемиканні
 function updateModalImage() {
     const mainImg = document.getElementById('modal-img');
     if (currentProduct.images && currentProduct.images[currentImageIndex]) {
         mainImg.src = currentProduct.images[currentImageIndex];
     }
     
-    // Підсвічуємо активну мініатюру
+    // Підсвічуємо активний слот
     document.querySelectorAll('.thumb').forEach((t, i) => {
         t.style.borderColor = (i === currentImageIndex) ? '#261f41' : 'transparent';
         t.style.opacity = (i === currentImageIndex) ? '1' : '0.6';
     });
 }
 
-// 4. Створення мініатюр
+// Створення мініатюр
 function renderThumbnails(p) {
     const thumbContainer = document.getElementById('thumbnails-container');
     if (!thumbContainer) return;
@@ -238,7 +236,7 @@ function renderThumbnails(p) {
     }
 }
 
-// 5. Функції для стрілочок галереї
+// Функції для стрілочок галереї
 function changeSlide(step) {
     if (!currentProduct.images || currentProduct.images.length <= 1) return;
     currentImageIndex += step;
@@ -247,14 +245,14 @@ function changeSlide(step) {
     updateModalImage();
 }
 
-// 6. Керування кількістю (модалка)
+// Керування кількістю (модалка)
 function changeQty(v) {
     let i = document.getElementById('qty-input');
     let n = parseInt(i.value) + v;
     if (n >= 1) i.value = n;
 }
 
-// 7. Додавання в кошик
+// Додавання в кошик
 function addToCart() {
     const qty = parseInt(document.getElementById('qty-input').value);
     const existing = cart.find(item => item.id === currentProduct.id);
@@ -265,7 +263,7 @@ function addToCart() {
     closeModal('product-modal');
 }
 
-// 8. Оновлення іконки кошика
+// Оновлення іконки кошика
 function updateCartUI() {
     const icon = document.getElementById('cart-icon');
     const count = document.getElementById('cart-count');
@@ -277,12 +275,12 @@ function updateCartUI() {
     }
 }
 
-// 9. Відкриття кошика
+// Відкриття кошика
 function openCart() {
     const list = document.getElementById('cart-items-list');
     const totalDisplay = document.getElementById('total-val');
     let total = 0;
-
+// Умова якщо кошик порожній
     if (cart.length === 0) {
         list.innerHTML = '<p style="text-align:center; padding: 20px;">Кошик порожній</p>';
         if (totalDisplay) totalDisplay.innerText = "0";
@@ -291,6 +289,8 @@ function openCart() {
             const itemTotal = item.price * item.qty;
             total += itemTotal;
             return `
+            // зовнішній вигляд одного рядка товару всередині кошика
+            
                 <div class="cart-item" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:15px; padding-bottom:10px; border-bottom:1px solid #eee;">
                     <img src="${item.img}" style="width:50px; height:50px; border-radius:8px; object-fit:cover;">
                     <div style="flex:1; margin-left:15px; font-size:13px; font-weight:bold; text-transform:uppercase;">
@@ -321,7 +321,7 @@ function updateCartItemQty(id, delta) {
     }
     updateCartUI();
 }
-
+//видаляємо лот
 function removeFromCart(id) {
     cart = cart.filter(i => i.id !== id);
     updateCartUI();
@@ -351,10 +351,10 @@ function createFloatingElements(count) {
     const container = document.getElementById('background-elements');
     if (!container) return;
 
-    // Список ваших іконок для фону
+    // Іконки фонів
     const images = [
         'images/skull_back.png', 
-        'images/et_back.png'   // Додайте шлях до вашої нової іконки
+        'images/et_back.png'   
     ];
 
     for (let i = 0; i < count; i++) {
@@ -383,5 +383,5 @@ function createFloatingElements(count) {
     }
 }
 
-// Запускаємо функцію
+// Запуск функції
 window.addEventListener('load', () => createFloatingElements(55));
